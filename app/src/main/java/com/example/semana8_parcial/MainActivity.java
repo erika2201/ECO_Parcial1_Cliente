@@ -53,21 +53,27 @@ public class MainActivity extends AppCompatActivity {
         redButton.setOnClickListener(
                 v -> {
                     color = "ROJO";
-                   // Toast.makeText(this, color, Toast.LENGTH_SHORT).show();
+                    redButton.setText("✔");
+                    greenButton.setText(" ");
+                    blueButton.setText(" ");
+                   Toast.makeText(this, color, Toast.LENGTH_SHORT).show();
                 });
-
-
         greenButton.setOnClickListener(
                 v -> {
                      color = "VERDE";
+                    greenButton.setText("✔");
+                    redButton.setText(" ");
+                    blueButton.setText(" ");
+                    Toast.makeText(this, color, Toast.LENGTH_SHORT).show();
                 });
-
-
         blueButton.setOnClickListener(
                 v -> {
                     color = "AZUL";
+                    blueButton.setText("✔");
+                    redButton.setText(" ");
+                    greenButton.setText(" ");
+                    Toast.makeText(this, color, Toast.LENGTH_SHORT).show();
                 });
-
 
         createButton.setOnClickListener(
                 v -> {
@@ -81,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 ()->{
                     try {
                         //Paso 2: Enviar solicitud de conexion
-                        socket = new Socket("192.168.1.16",2021);
+                        socket = new Socket("192.168.0.32",2021); //cambiar la ip v:v
                         //Paso 3: Cliente y server conectados
                         System.out.println("Se ha conectado al servidor!!!");
 
@@ -134,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
                     String json;
                     Orden obj = new Orden(name, number, x, y, color);
                     json = gson.toJson(obj);
-                    Toast.makeText(this, json, Toast.LENGTH_SHORT).show();
                     sendMessage(json);
                 };
 
