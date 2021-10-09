@@ -80,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
                     createButton();
                 });
 
+        deleteButton.setOnClickListener(
+                v -> {
+                    deleteButton();
+                });
+
     }
 
     public void initClient() {
@@ -125,23 +130,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void deleteButton(){
-        deleteButton.setOnClickListener(
-                v -> {
-                   nameEditText.setText(" ");
-                   cantEditText.setText(" ");
-                   coordxEditText.setText(" ");
-                   coordyEditText.setText(" ");
-                });
+        nameEditText.setText(" ");
+        cantEditText.setText(" ");
+        coordxEditText.setText(" ");
+        coordyEditText.setText(" ");
     }
 
     public void createButton(){
+
+        if(!nameEditText.getText().toString().replaceAll("\\s","").isEmpty()&&
+           ! cantEditText.getText().toString().replaceAll("\\s","").isEmpty()&&
+           ! coordxEditText.getText().toString().replaceAll("\\s","").isEmpty()&&
+           ! coordyEditText.getText().toString().replaceAll("\\s","").isEmpty()) {
                     colorButton();
                     Gson gson = new Gson();
                     String json;
                     Orden obj = new Orden(name, number, x, y, color);
                     json = gson.toJson(obj);
                     sendMessage(json);
-                };
+           }else{
+            Toast.makeText(this, "Ingresa todos los datos", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     public void sendMessage(String msg) {
         new Thread(
